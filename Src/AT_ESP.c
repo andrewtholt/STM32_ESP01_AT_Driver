@@ -3,8 +3,6 @@
 #include <stdio.h>
 
 
-
-
 char ESPBuffer[128];
 __IO uint16_t ESPRxIndex = 0x00;
 const char ResponseOK[] = "OK\r\n";
@@ -32,8 +30,7 @@ void USART2_IRQHandler (void) {
     }
 }
 
-
-
+// TODO replace with proper delay
 static void delay () {
     int i, j;
     i = 1000;
@@ -47,7 +44,6 @@ static void ClearESPBuffer () {
     ESPRxIndex = 0x00;
     memset (ESPBuffer, '\0', ESP8266_RX_BUFFER_LEN);
 }
-
 
 static void SendEspCommand (char *order) {
     ClearESPBuffer ();
@@ -66,8 +62,6 @@ static char CheckResponse () {
     }
     return 1;
 }
-
-
 
 uint8_t CheckEsp (void) {
     SendEspCommand ("AT\r\n");
